@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+
+<style>
+	.error {
+		color: red;
+	}
+
+	.custom-box {
+		width: 100%;
+		/* Tamanho desejado */
+		max-width: 100%;
+		/* Tamanho máximo para responsividade */
+	}
+
+	@media (max-width: 768px) {
+		.custom-box {
+			width: 100%;
+			/* Tamanho máximo em telas menores (por exemplo, telas menores que 768px) */
+		}
+	}
+
+	.custom-form {
+		width: 40%;
+		/* Tamanho desejado para o formulário */
+		max-width: 100%;
+		/* Tamanho máximo para responsividade */
+	}
+
+	@media (max-width: 768px) {
+		.custom-form {
+			width: 100%;
+			/* Tamanho máximo em telas menores (por exemplo, telas menores que 768px) */
+		}
+	}
+</style>
+
+{% endblock %}
+
+{% block main %}
+<br>
+<br>
+<div class="my-login-page" id="main">
+
+	<!-- ======= Seção de contato ======= -->
+	<section id="contact" class="contact">
+		<div class="container" data-aos="fade-up" style="max-width: 100%; ">
+			<div class="section-header">
+				<h2>Faça Login</h2>
+			</div>
+			<div class="custom-box d-flex justify-content-center">
+
+				<form method="POST" class="form custom-form" novalidate="">
+                    {% csrf_token %}
+
+					<div class="form-group">
+						<label for="id_username">E-mail</label>
+						<!-- {{ form.username }} -->
+						<input type="text" name="username" class="form-control" maxlength="100" required=""
+							id="id_username" placeholder="Informe Seu E-mail">
+					</div>
+
+					<div class="form-group">
+						<label for="password">Senha</label>
+						<input type="password" name="password" class="form-control" maxlength="100" required=""
+							id="id_password" placeholder="Informe Sua Senha">
+
+						<!-- {{ form.password }} -->
+					</div>
+
+					<div class="form-group">
+						<div class="custom-checkbox custom-control">
+							<input type="checkbox" name="remember" id="remember" class="custom-control-input">
+							<label for="remember" class="custom-control-label">Lembre-me</label>
+						</div>
+					</div>
+
+					<div class="form-group m-0">
+						<button type="submit" class="btn btn-primary btn-block"
+							style="background-color: #0B949D; border-color: #0B949D;">
+							Login
+						</button>
+					</div>
+					<div class="mt-4 text-center">
+						Não tem uma conta ainda? <a href="{% url 'cadastrar' %}">Crie uma</a>
+					</div>
+				</form>
+			</div>
+		</div>
+
+</div>
+</section><!-- End Section -->
+
+</div>
+{% endblock %}

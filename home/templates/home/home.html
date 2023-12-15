@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block main %}
+
+<!-- ======= Seção Inicial ======= -->
+<section id="hero" class="hero">
+  <div class="container position-relative">
+    <div class="row gy-5" data-aos="fade-in">
+      <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
+        <h2>Seja Bem Vindo!</h2>
+        <p>Desabafe aqui. Nos ajude a entender a sua situação e de todos os discentes do IFRN - Campus Pau dos Ferros.
+          Não se preocupe, suas informações estarão em sigilo. E ai, como vai o seu dia?</p>
+        <div class="d-flex justify-content-center justify-content-lg-start">
+          <a href="#about" class="btn-get-started">Começe aqui</a>
+        </div>
+      </div>
+      <div class="col-lg-6 order-1 order-lg-2">
+        <img src="{% static 'admin/assets/img/paginainicial.png' %}" class="img-fluid" alt="" data-aos="zoom-out"
+          data-aos-delay="100" id="flying-img">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ======= Seção Sobre ======= -->
+<br>
+<br>
+<section id="about" class="about">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-header">
+      <h2>Sobre nós</h2>
+    </div>
+
+    <div class="row gy-4">
+      <div class="col-lg-6">
+        <img src="{% static 'admin/assets/img/team/Nos4.jpg' %}" class="img-fluid rounded-4 mb-4" alt="">
+      </div>
+      <div class="col-lg-6">
+        <div class="content ps-0 ps-lg-5">
+          <p class="fst-italic">
+            Olá, somos alunos do 4° ano de informática do IFRN - campus Pau dos ferros. Nosso objetivo com o projeto é
+            te ajudar a ter consciência de suas emoções diárias. Desabafe o que está sentindo, isso é uma ótima maneira
+            de se aliviar do estresse do dia-a-dia. Somos todo ouvidos!
+          </p>
+          <p class="fst-italic">
+            A ideia desse projeto foi motivada durante a produção de nossos projetos integradores. inicialmente,
+            enquanto estudantes, pensamos que seria útil e adequado a criação de uma plataforma para desabafar sobre o
+            turbilhão de emoções diárias
+            que sentimos estando em um ambiente acadêmico e com uma diversidade de pessoas e relacionamentos. Essas
+            emoções ocorrem por fatores diversos: seja por provas, trabalhos, relacionamentos pessoais, bullying,
+            assédio, preconceitos, etc.
+          </p>
+          <p class="fst-italic">Não se preocupe, suas informações estarão nas mãos de profissionais!</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ======= Seção de Emoções ======= -->
+<br>
+<br>
+<section id="portfolio" class="portfolio sections-bg">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-header">
+      <h2>Emoções</h2>
+      <div>
+        <ul class="portfolio-flters">
+          <li data-filter="*" class="raiva">Raiva</li>
+          <li data-filter=".filter-app" class="alegria">Alegria</li>
+          <li data-filter=".filter-product" class="medo">Medo</li>
+          <li data-filter=".filter-branding" class="tristeza">Tristeza</li>
+          <li data-filter=".filter-books" class="nojo">Nojo</li>
+        </ul><!-- End Filters -->
+        <p>Aprenda mais sobre suas amoções com os personagens de divertidamente!</p>
+      </div>
+    </div>
+
+    <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry"
+      data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
+
+      <div class="row gy-4 portfolio-container">
+
+        <div class="col-xl-4 col-md-6 portfolio-item filter-app">
+          <div class="portfolio-wrap">
+            <a href="{% static 'admin/assets/img/emotions/raiva.png' %}" data-gallery="portfolio-gallery-app"
+              class="glightbox"><img src="{% static 'admin/assets/img/emotions/raiva.png' %}" class="img-fluid"
+                alt=""></a>
+            <div class="portfolio-info">
+              <h4><a href="{% url 'PaginaEmocoes' %}" title="More Details">Raiva</a></h4>
+              <p>Descubra o que está por trás da raiva que sentimos</p>
+            </div>
+          </div>
+        </div><!-- End Item -->
+
+        <div class="col-xl-4 col-md-6 portfolio-item filter-product">
+          <div class="portfolio-wrap">
+            <a href="{% static 'admin/assets/img/emotions/alegria.png' %}" data-gallery="portfolio-gallery-app"
+              class="glightbox"><img src="{% static 'admin/assets/img/emotions/alegria.png' %}" class="img-fluid"
+                alt=""></a>
+            <div class="portfolio-info">
+              <h4><a href="{% url 'PaginaEmocoes' %}" title="More Details">Alegria</a></h4>
+              <p>Aprenda sobre o melhor dos sentimentos!</p>
+            </div>
+          </div>
+        </div><!-- End Item -->
+
+        <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
+          <div class="portfolio-wrap">
+            <a href="{% static 'admin/assets/img/emotions/medo.png' %}" data-gallery="portfolio-gallery-app"
+              class="glightbox"><img src="{% static 'admin/assets/img/emotions/medo.png' %}" class="img-fluid"
+                alt=""></a>
+            <div class="portfolio-info">
+              <h4><a href="{% url 'PaginaEmocoes' %}" title="More Details">Medo</a></h4>
+              <p>Porque sentimos medo?</p>
+            </div>
+          </div>
+        </div><!-- End Item -->
+
+        <div class="col-xl-4 col-md-6 portfolio-item filter-varios">
+          <div class="portfolio-wrap">
+            <a href="{% static 'admin/assets/img/emotions/Sentimentos.jpeg' %}" class="glightbox"><img
+                src="{% static 'admin/assets/img/emotions/Sentimentos.jpeg' %}" class="img-fluid" alt=""></a>
+            <div class="portfolio-info">
+              <h4><a href="{% url 'PaginaEmocoes' %}" title="More Details">Outros sentimentos</a></h4>
+              <p>você sabia que os nossos sentimentos são experiências complexas e subjetivas que envolvem uma
+                combinação de processos cognitivos, emocionais e fisiológicos?
+                pois é! temos muitos outros. Descubra aqui.
+              </p>
+            </div>
+          </div>
+        </div><!-- End Item -->
+
+        <div class="col-xl-4 col-md-6 portfolio-item filter-books">
+          <div class="portfolio-wrap">
+            <a href="{% static 'admin/assets/img/emotions/nojo3.png' %}" data-gallery="portfolio-gallery-app"
+              class="glightbox"><img src="{% static 'admin/assets/img/emotions/nojo3.png' %}" class="img-fluid"
+                alt=""></a>
+            <div class="portfolio-info">
+              <h4><a href="{% url 'PaginaEmocoes' %}" title="More Details">Nojo</a></h4>
+              <p>Você sente nojo de algo?</p>
+            </div>
+          </div>
+        </div><!-- End Item -->
+
+        <div class="col-xl-4 col-md-6 portfolio-item filter-app">
+          <div class="portfolio-wrap">
+            <a href="{% static 'admin/assets/img/emotions/tristeza2.png' %}" data-gallery="portfolio-gallery-app"
+              class="glightbox"><img src="{% static 'admin/assets/img/emotions/tristeza2.png' %}" class="img-fluid"
+                alt=""></a>
+            <div class="portfolio-info">
+              <h4><a href="{% url 'PaginaEmocoes' %}" title="More Details">Tristeza</a></h4>
+              <p>infelizmente esse é um sentimento presente em todos nós... descubra mais!</p>
+            </div>
+          </div>
+        </div><!-- End Item -->
+
+
+      </div>
+
+    </div>
+
+  </div>
+</section><!-- End Section -->
+
+<!-- ======= Seção Nosso Time ======= -->
+<br>
+<br>
+<section id="team" class="team">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-header">
+      <h2>Nosso time</h2>
+      <p></p>
+    </div>
+
+    <div class="row gy-4">
+
+      <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+        <div class="member">
+          <img src="{% static 'admin/assets/img/team/DamiaoFelipe.jpeg' %}" class="img-fluid" alt="">
+          <h4>Damião Felipe</h4>
+          <span>Discente</span>
+          <div class="social">
+            <a href=""><i class="bi bi-twitter"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div><!-- End Team Member -->
+
+      <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
+        <div class="member">
+          <img src="{% static 'admin/assets/img/team/Isabel.jpeg' %}" class="img-fluid" alt="">
+          <h4>Isabel Paiva</h4>
+          <span>Discente</span>
+          <div class="social">
+            <a href=""><i class="bi bi-twitter"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div><!-- End Team Member -->
+
+      <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
+        <div class="member">
+          <img src="{% static 'admin/assets/img/team/Leocassio.jpeg' %}" class="img-fluid" alt="">
+          <h4>Leocássio</h4>
+          <span>Orientador externo</span>
+          <div class="social">
+            <a href=""><i class="bi bi-twitter"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div><!-- End Team Member -->
+
+      <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
+        <div class="member">
+          <img src="{% static 'admin/assets/img/team/Ciro.jpeg' %}" class="img-fluid" alt="">
+          <h4>Ciro Moura</h4>
+          <span>Orientador</span>
+          <div class="social">
+            <a href=""><i class="bi bi-twitter"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div><!-- End Team Member -->
+
+    </div>
+
+  </div>
+</section><!-- End Our Team Section -->
+
+{% endblock %}

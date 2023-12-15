@@ -1,0 +1,22 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %} 
+    Monemotion Administrativo | {{ site_title|default:_('Monemotion Admin') }}
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/changelists.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/nav_siderbar.css' %}" />
+
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/custom_admin.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/reponsive.css' %}" />
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Monemotion Administração</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

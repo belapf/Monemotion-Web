@@ -1,0 +1,62 @@
+<!-- emocao_confirm_delete.html -->
+{% extends "base.html" %}
+
+{% block style %}
+<style>
+    /* Adicione seu próprio estilo CSS aqui */
+    .form{
+        padding: 100px;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+
+    h1 {
+        text-align: center;
+        color: rgba(1, 41, 112, 0.6);
+    }
+
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+
+    button {
+        background-color: #d9534f;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #c9302c;
+    }
+</style>
+{% endblock %}
+
+{% block main %}
+<div class="form">
+    <form method="post">
+        <section>
+            {% csrf_token %}
+            <p>Você tem certeza que quer deletar a emoção "{{ object.tipo_emocao }}"?</p>
+            {{ form }}
+        </section>
+        <button type="submit">
+            <i class="fas fa-check" aria-hidden="true"></i>
+            Confirmar
+        </button>
+    </form>
+</div>
+
+{% endblock %}

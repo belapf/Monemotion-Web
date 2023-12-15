@@ -1,0 +1,294 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+
+<style>
+  label {
+    margin: 0px;
+    padding: 0px;
+    margin-top: 10px;
+  }
+
+  /* Estilização básica para o formulário */
+  form {
+    width: 100%;
+    padding: 10px;
+    margin: auto;
+    background-color: #f7f7f7;
+
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+    border: 0.8px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .error {
+    color: red;
+  }
+
+  .img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+
+
+
+   /* Estilo básico para o campo de escolher imagem */
+   .custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    color: #555;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: background-color 0.3s;
+  }
+
+  .custom-file-upload:hover {
+    background-color: #f5f5f5;
+  }
+
+  /* Estiliza o input file para ficar invisível */
+  input[type="file"] {
+    display: none;
+  }
+</style>
+
+{% endblock %}
+
+{% block main %}
+<br>
+<br>
+<div class="my-login-page" id="main">
+
+  <!-- ======= Seção de contato ======= -->
+  <section id="contact" class="contact">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-header">
+        <h2>Cadastre-se</h2>
+        <p>Seja bem-vindo(a)! Cadastre-se agora e encontre um espaço seguro e acolhedor para desabafar suas emoções.</p>
+      </div>
+
+      <div class="row gx-lg-0 gy-4">
+
+        <div class="col-lg-4">
+
+          <div class="info-container d-flex flex-column align-items-center justify-content-center">
+            <img src="{% static 'admin/assets/img/LOGO CINZA.png' %}" alt="" class="img">
+          </div>
+
+        </div>
+
+        <div class="col-lg-8">
+          <!-- <form method="post" action="{% url 'cadastrar' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Enviar</button>
+          </form> -->
+
+          <form method="POST" class="" action="{% url 'cadastrar' %}">
+            {% csrf_token %}
+            <input type="hidden" name="{{ form.role.name }}" value="{{ form.role.value }}">
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="id_first_name">Nome</label>
+                <input type="text" name="first_name" class="form-control" maxlength="100" required="" id="id_first_name"
+                  placeholder="Informe seu Nome">
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <label for="id_last_name">Sobrenome</label>
+                <input type="text" name="last_name" class="form-control" maxlength="100" required="" id="id_last_name"
+                  placeholder="Informe seu Sobrenome">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="id_etnia">Etnia</label>
+                <select class="form-control border-right-0" id="id_etnia" name="etnia" value=""
+                  data-placeholder="Escolha uma Etnia">
+                  <option value="">Escolha uma Etnia</option>
+                  <option value="1">teste</option>
+                </select>
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="id_classe_social">Classe Social</label>
+                <select class="form-control border-right-0" id="id_classe_social" name="classe_social" value=""
+                  data-placeholder="Escolha uma Classe Social">
+                  <option value="">Escolha uma Classe Social</option>
+                  <option value="1">Teste</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="id_ano">Curso</label>
+                <select class="form-control border-right-0" id="id_curso" name="curso" value="{{request.POST.curso}}"
+                  data-placeholder="Escolha uma curso">
+                  <option value="">Escolha uma Curso</option>
+                  {% for curso in cursos %}
+                  <option value="{{ curso.id }}">{{ curso.nome }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="id_ano">Ano</label>
+                <select class="form-control border-right-0" id="id_ano" name="ano"
+                  data-placeholder="Escolha uma Ano/Período">
+                  <option value="">Escolha uma Ano/Período</option>
+                  {% for ano in anos %}
+                  <option value="{{ ano.id }}">{{ ano.nome }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="id_email">E-mail</label>
+                <input type="email" name="email" class="form-control" maxlength="254" required="" id="id_email"
+                  placeholder="Informe seu E-mail">
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <label for="id_telefone">Telefone</label>
+                <input type="text" name="telefone" class="form-control" maxlength="15" id="id_telefone"
+                  placeholder="Informe seu Telefone">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="id_password1">Senha</label>
+                <input type="password" name="password1" required="" id="id_password1" placeholder="Informe sua Senha">
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <label for="id_password2">Confirmar Senha</label>
+                <input type="password" name="password2" required="" id="id_password2"
+                  placeholder="Informe sua Confirmação de Senha">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="id_cep">Cep</label>
+                <input type="text" name="cep" class="form-control" maxlength="20" id="id_cep"
+                  placeholder="Informe seu CEP">
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <label for="id_cidade">Cidade</label>
+                <input type="text" name="cidade" class="form-control" maxlength="100" id="id_cidade"
+                  placeholder="Informe sua Cidade">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="id_rua">Rua</label>
+                <input type="text" name="rua" class="form-control" maxlength="100" id="id_rua"
+                  placeholder="Informe sua Rua">
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <label for="id_bairro">Bairro</label>
+                <input type="text" name="bairro" class="form-control" maxlength="100" id="id_bairro"
+                  placeholder="Informe seu Bairro">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="id_logadouro">Logradouro</label>
+                <input type="text" name="logadouro" class="form-control" maxlength="100" id="id_logadouro"
+                  placeholder="Informe o Logadouro">
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <label for="id_numero">Número</label>
+                <input type="text" name="numero" class="form-control" maxlength="30" id="id_numero"
+                  placeholder="Informe o Número de sua casa">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="id_localidade" style="margin-bottom: 10px;">Localidade</label>
+                {{ form.localidade}}
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <label for="id_matricula">Matricula</label>
+                <input type="text" name="matricula" class="form-control" maxlength="30" id="id_matricula"
+                  placeholder="Informe sua Matricula">
+              </div>
+            </div>
+
+            <div class="row" >
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <label for="id_religiao">religiao</label>
+                <input type="text" name="religiao" class="form-control" maxlength="30" id="id_religiao"
+                  placeholder="Informe sua religião">
+              </div>
+              <div class="col-md-12 form-group">
+                <label for="id_image" class="custom-file-upload">Imagem de Perfil</label>
+                <input type="file" name="image" accept="image/*" id="id_image" style="display:none;" placeholder="Insira sua Imagem para o Profile">
+              </div>
+            </div>
+            
+            <div class="form-group m-0">
+              <button type="submit" class="btn btn-primary btn-block"
+                style="background-color: #0B949D; border-color: #0B949D; margin-top: 15px;">
+                Cadastrar
+              </button>
+            </div>
+          </form>
+
+        </div><!-- End Form -->
+
+      </div>
+
+    </div>
+  </section><!-- End Section -->
+
+</div>
+{% endblock %}
+
+
+{% block js %}
+
+<!-- jQuery (necessário para o Inputmask) -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Inputmask -->
+<script src="https://rawgit.com/RobinHerbots/Inputmask/5.x/dist/jquery.inputmask.min.js"></script>
+
+<!-- Seu código JavaScript personalizado -->
+<script>
+  $(document).ready(function () {
+    // Adiciona máscara para o campo de telefone
+    $('#id_telefone').inputmask('(99) 99999-9999');
+
+    // Adiciona máscara para o campo de CEP
+    $('#id_cep').inputmask('99999-999');
+
+    // Adiciona máscara para o campo de e-mail
+    $('#id_email').inputmask({ alias: 'email' });
+
+    // Adiciona máscara para o campo de matrícula
+    $('#id_matricula').inputmask('99999999999999');
+
+    // Adicione mais máscaras conforme necessário
+  });
+</script>
+
+  
+{% endblock js %}

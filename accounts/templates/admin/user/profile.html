@@ -1,0 +1,603 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<!-- Vendor CSS Files -->
+<link href="{% static 'admin/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+<link href="{% static 'admin/assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+<link href="{% static 'admin/assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+<link href="{% static 'admin/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+<link href="{% static 'admin/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+<link href="{% static 'admin/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+
+<!-- Google Fonts -->
+<link href="https://fonts.gstatic.com" rel="preconnect">
+<link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+
+{% block style %}
+<style>
+    #button {
+        background-color: #0B949D;
+        border-color: #0B949D;
+    }
+
+    .circulo {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .imagem-circular {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .col-form-label{
+        font-weight: 600;
+        color: rgba(1, 41, 112, 0.6);
+    }
+    
+</style>
+{% endblock style %}
+
+
+{% block main %}
+<section class="section profile" id="section-profile">
+    <div class="row">
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                    
+                    {% if user_profile.user.image %}
+                        <img src="{{ user_profile.user.image }}" alt="Imagem" class="imagem-circular">
+                    {% else %}
+                        <img src="{% static 'img/default_avatar.png' %}" alt="Profile" class="rounded-circle">
+                    {% endif %}
+                    
+                    
+                    <h2>{{ user_profile.user.first_name }} {{ user_profile.user.last_name }}</h2>
+                    <h3>{{ user_profile.user.matricula }}</h3>
+
+                    {% if user.role == user.ALUNO %}
+                    <button type="button" class="btn btn-info"
+                        style="background-color: #0B949D; border-color: #0B949D;"><a href="{% url 'EnviarEmocao' %}"
+                            style="color: white;">Enviar Emoção</a></button>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-8">
+            <div class="card">
+                <div class="card-body pt-3">
+                    <!-- abas com bordas -->
+                    <ul class="nav nav-tabs nav-tabs-bordered">
+                        <li class="nav-item">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#dados">Dados</button>
+                        </li>
+                        
+                        <!--
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#editar-perfil">Editar
+                                Perfil</button>
+                        </li>
+                        -->
+
+                        {% if user.role == user.PROFESSOR or user.role == user.Admin %}
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab"
+                                data-bs-target="#lista-de-alunos">Lista de alunos</button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab"
+                                data-bs-target="#relatorios">Relatórios</button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab"
+                                data-bs-target="#fazer-relatorios">Fazer relatórios</button>
+                        </li>
+                        {% endif %}
+
+                        {% if user.role == user.ALUNO %}
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#graficos">Gráficos</button>
+                        </li> 
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#historico">Histórico</button>
+                        </li>
+                        
+                        {% endif %}
+
+                        
+                        
+                    </ul>
+
+
+
+
+
+
+                    <div class="tab-content pt-2">
+                        <div class="tab-pane fade show active profile-overview" id="dados">
+
+                            <h5 class="card-title">Detalhes do perfil</h5>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label ">Nome</div>
+                                <div class="col-lg-9 col-md-8">{{ user_profile.user.first_name }} {{ user_profile.user.last_name }}</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Matricula</div>
+                                <div class="col-lg-9 col-md-8">{{ user_profile.user.matricula }}</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Curso</div>
+                                <div class="col-lg-9 col-md-8">{{ user_profile.user.curso }}</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Ano</div>
+                                <div class="col-lg-9 col-md-8">{{ user_profile.user.ano }}</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Cidade</div>
+                                <div class="col-lg-9 col-md-8">{{ user_profile.user.cidade }}</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Endereço</div>
+                                <div class="col-lg-9 col-md-8">{{ user_profile.user.rua }}, {{ user_profile.user.bairro }}, {{ user_profile.user.logadouro }}, {{ user_profile.user.numero }}</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Email</div>
+                                <div class="col-lg-9 col-md-8">{{ user_profile.user.email }}</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Telefone</div>
+                                <div class="col-lg-9 col-md-8">{{ user_profile.user.telefone }}</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Religião</div>
+                                <div class="col-lg-9 col-md-8">{{ user_profile.user.religiao }}</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Classe Social</div>
+                                <div class="col-lg-9 col-md-8">{{ user_profile.user.classe_social }}</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Localidade</div>
+                                <div class="col-lg-9 col-md-8">{{ user_profile.user.localidade }}</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Etnia</div>
+                                <div class="col-lg-9 col-md-8">{{ user_profile.user.etnia }}</div>
+                            </div>
+                        </div>
+
+                        <!-- 
+                        <div class="tab-pane fade profile-edit pt-3" id="editar-perfil">
+                            
+                            <form>
+                                <div class="row mb-3">
+                                    <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Imagem
+                                        do perfil</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <img src="{% static 'img/default_avatar.png' %}" alt="Profile">
+                                        <div class="pt-2">
+                                            <a href="#" class="btn btn-primary btn-sm" title="Atualizar foto de perfil"
+                                                id="button"><i class="bi bi-upload"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm" title="Remover foto do perfil"><i
+                                                    class="bi bi-trash"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="nome" class="col-md-4 col-lg-3 col-form-label">Nome</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="nome" type="text" class="form-control" id="nome"
+                                            value="{{ user_profile.user.first_name }}">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="matricula" class="col-md-4 col-lg-3 col-form-label">Matricula</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="matricula" type="text" class="form-control" id="matricula"
+                                            value="{{ user_profile.user.matricula }}">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="curso" class="col-md-4 col-lg-3 col-form-label">Curso</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="curso" type="text" class="form-control" id="curso"
+                                            value="{{ user_profile.user.curso }}">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="ano" class="col-md-4 col-lg-3 col-form-label">Ano</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="ano" type="text" class="form-control" id="ano"
+                                            value="{{ user_profile.user.ano }}">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="cidade" class="col-md-4 col-lg-3 col-form-label">Cidade</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="cidade" type="text" class="form-control" id="cidade"
+                                            value="{{ user_profile.user.cidade }}">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="endereco" class="col-md-4 col-lg-3 col-form-label">Endereço</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="endereco" type="text" class="form-control" id="endereco"
+                                            value="{{ user_profile.user.rua }}, {{ user_profile.user.bairro }}, {{ user_profile.user.logradouro }}, {{ user_profile.user.numero }}">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="email" type="email" class="form-control" id="email"
+                                            value="{{ user_profile.user.email }}">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="telefone" class="col-md-4 col-lg-3 col-form-label">Telefone</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="telefone" type="text" class="form-control" id="telefone"
+                                            value="{{ user_profile.user.numero }}">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="religiao" class="col-md-4 col-lg-3 col-form-label">Religião</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="religiao" type="text" class="form-control" id="religiao"
+                                            value="{{ user_profile.user.religiao }}">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="classe_social" class="col-md-4 col-lg-3 col-form-label">Classe
+                                        social</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="classe_social" type="text" class="form-control" id="classe_social"
+                                            value="{{ user_profile.user.classe_social }}">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="localidade" class="col-md-4 col-lg-3 col-form-label">Localidade</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="localidade" type="text" class="form-control" id="localidade"
+                                            value="{{ user_profile.user.localidade }}">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="etnia" class="col-md-4 col-lg-3 col-form-label">Etnia</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="etnia" type="text" class="form-control" id="etnia"
+                                            value="{{ user_profile.user.etnia }}">
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary" id="button">Salvar</button>
+                                </div>
+                            </form>
+                        </div>
+                         -->
+
+                        <div class="tab-pane fade pt-3" id="graficos">
+
+                            <div style="width: 100%; margin: 0 auto;">
+                                <canvas id="barChart"></canvas>
+                            </div>
+
+                            <div style="width: 100%; margin: 0 auto;">
+                                <canvas id="pieChart"></canvas>
+                            </div>
+
+                            <script>
+                                // Obtenha os dados do contexto Django
+                                var labels = {{ labels| safe }};
+                                var data = {{ data| safe }};
+
+                                // Crie o gráfico de barra
+                                var ctxBar = document.getElementById('barChart').getContext('2d');
+                                new Chart(ctxBar, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: labels,
+                                        datasets: [{
+                                            label: 'Quantidade',
+                                            data: data,
+                                            backgroundColor: [
+                                                'rgba(75, 192, 192, 1)',
+                                            ],
+                                            borderColor: [
+                                                'rgba(75, 192, 192, 1)',
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            y: {
+                                                beginAtZero: true
+                                            }
+                                        }
+                                    }
+                                });
+
+
+                            </script>
+
+                        </div>
+                        
+
+                        <div class="tab-pane fade pt-3" id="fazer-relatorios" style="width: 100%;" >
+                            <div class="col-lg-6" style="width: 100%;" >
+
+                                <div class="card" style="width: 100%;">
+                                  <div class="card-body">
+                                    <h5 class="card-title">Fazer relatório</h5>
+                      
+                                    <!-- General Form Elements -->
+                                    <form>
+                                      <div class="row mb-3">
+                                        <label for="inputText" class="col-sm-2 col-form-label">Titulo</label>
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control">
+                                        </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                        <label for="inputEmail" class="col-sm-2 col-form-label">Turma</label>
+                                        <div class="col-sm-10">
+                                          <input type="email" class="form-control">
+                                        </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                        <label for="inputNumber" class="col-sm-2 col-form-label">Imagem</label>
+                                        <div class="col-sm-10">
+                                          <input class="form-control" type="file" id="formFile">
+                                        </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                        <label for="inputDate" class="col-sm-2 col-form-label">Data</label>
+                                        <div class="col-sm-10">
+                                          <input type="date" class="form-control">
+                                        </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                        <label for="inputTime" class="col-sm-2 col-form-label">Hora</label>
+                                        <div class="col-sm-10">
+                                          <input type="time" class="form-control">
+                                        </div>
+                                      </div>
+                      
+                                      <div class="row mb-3">
+                                        <label for="inputPassword" class="col-sm-2 col-form-label">Espaço pro relatório</label>
+                                        <div class="col-sm-10">
+                                          <textarea class="form-control" style="height: 100px"></textarea>
+                                        </div>
+                                      </div>
+                      
+                                      <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label">Submeter relatório</label>
+                                        <div class="col-sm-10">
+                                          <button type="submit" class="btn btn-primary" id="button">Enviar</button>
+                                        </div>
+                                      </div>
+                      
+                                    </form><!-- End General Form Elements -->
+                      
+                                  </div>
+                                </div>
+                      
+                              </div>
+                      
+                        </div>
+
+                        {% if user.role == user.ALUNO %}
+                        <div class="tab-pane fade pt-3" id="historico">
+                        
+                            {% for emocao in emocoes_do_usuario %}
+            
+                            <div class="card"> <!-- começo do card -->
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ emocao.tipo_emocao }}</h5>
+                                    <p>{{ emocao.descricao }}</p>
+
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#basicModal" id="button">
+                                        Detalhes
+                                    </button>
+                                    
+                                    <a href="{% url 'emocao_delete' pk=emocao.id %}" class="btn btn-danger">Excluir</a>
+                                    
+                                    <div class="modal fade" id="basicModal" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Emoção do aluno</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Data: {{ emocao.data_criacao }}</p>
+                                                    <p>Motivo: {{ emocao.motivo }}</p>
+                                                    <p>Desabafo: {{ emocao.descricao }}</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">sair</button>
+                                                    <button type="button" class="btn btn-primary"
+                                                        id="button">Editar</button>
+                                                        
+                                                    <!-- leva para a tela de desabafo/só pode editar no mesmo dia-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- final do card-->
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+
+
+                        <div class="tab-pane fade pt-3" id="relatorios">
+
+                            <div class="card"> <!-- começo do card -->
+                                <div class="card-body">
+                                    <h5 class="card-title">Turma do 4 ano de informática vespertino</h5>
+                                    <p>Recentemente a turma tem apresentado um quadro elevadao de emoções de...</p>
+
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#basicModal" id="button">
+                                        Detalhes
+                                    </button>
+                                    <div class="modal fade" id="basicModal" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Relatório</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Data: </p>
+                                                    <p>Turma:</p>
+                                                    <p>Descrição:</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">sair</button>
+                                                    <button type="button" class="btn btn-primary"
+                                                        id="button">Editar</button>
+                                                    <!-- leva para a tela de desabafo/só pode editar no mesmo dia-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- final do card-->
+
+                            <div class="card"> <!-- começo do card -->
+                                <div class="card-body">
+                                    <h5 class="card-title">Turma do 2 ano de Alimentos Matutino</h5>
+                                    <p>Durante a semana da consciencia negra os alunos relataram...</p>
+
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#basicModal" id="button">
+                                        Detalhes
+                                    </button>
+                                    <div class="modal fade" id="basicModal" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Relatório</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Data: </p>
+                                                    <p>Turma:</p>
+                                                    <p>Descrição:</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">sair</button>
+                                                    <button type="button" class="btn btn-primary"
+                                                        id="button">Editar</button>
+                                                    <!-- leva para a tela de desabafo/só pode editar no mesmo dia-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- final do card-->
+                        </div>
+
+
+                        <div class="tab-pane fade pt-3" id="lista-de-alunos" style="width: 100%;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="color:rgba(1, 41, 112, 0.6);">Indice</th>
+                                        <th scope="col" style="color:rgba(1, 41, 112, 0.6);">Nome</th>
+                                        <th scope="col" style="color:rgba(1, 41, 112, 0.6);">Emoção</th>
+                                        <th scope="col" style="color:rgba(1, 41, 112, 0.6);">Curso</th>
+                                        <th scope="col" style="color:rgba(1, 41, 112, 0.6);">Ano</th>
+                                        <th scope="col" style="color:rgba(1, 41, 112, 0.6);">Turno</th>
+                                        <th scope="col" style="color:rgba(1, 41, 112, 0.6);">Vizualizar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for user in users %}
+                                    <tr>
+                                        <th scope="row" style="color:rgba(1, 41, 112, 0.6);">{{ forloop.counter }}</th>
+                                        <td>{{ user.first_name }}</td>
+                                        <td>
+                                            {% for emocao in emocoes_por_usuario.user %}
+                                                {{ emocao.tipo_emocao }}{% if not loop.last %}, {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                        <td>{{ user.curso }}</td>
+                                        <td>{{ user.ano }}</td>
+                                        <td>{{ user.turno }}</td>
+                                        <td> <button type="button" class="btn btn-primary" id="button">vizualizar </button></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div><!-- final abas com bordas -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block js %}
+<!-- Vendor JS Files -->
+<script src="{% static 'admin/assets/vendor/chart.js/chart.umd.js' %}"></script>
+<script src="{% static 'admin/assets/vendor/echarts/echarts.min.js' %}"></script>
+{% endblock %}

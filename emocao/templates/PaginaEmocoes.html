@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block style %}
+<style>
+    .post-img {
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    #emocoes {
+        display: flex;
+        justify-content: center;
+
+    }
+</style>
+{% endblock %}
+
+
+{% block main %}
+
+<!-- ======= Começo ======= -->
+<div class="breadcrumbs">
+    <div class="page-header d-flex align-items-center" style="background-image: url('');">
+        <div class="container position-relative">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <h2>Emoções</h2>
+                    <p>Entenda um pouco mais sobre nossas principais emoções</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ======= Começo ======= -->
+
+<br>
+<br>
+<!-- ======= seção de noticias recentes ======= -->
+<section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+
+        <div class="row g-5" id="emocoes">
+
+            <div class="col-lg-8" style="width: 1000px;">
+                <article class="blog-details">
+                    <!-- Topo da noticia -->
+                    <h2 class="title">Emoções universais, segundo a psicologia</h2>
+                    <!-- coloca a titulo da noticia aqui -->
+                    <br>
+
+                    <div class="meta-bottom">
+                        <i class="bi bi-tags"></i>
+                        <ul class="tags">
+                            <li><a href="#">Espaço para um possivel link</a></li>
+                        </ul>
+                    </div><!-- End meta bottom -->
+                    <!-- Final do topo da noticia -->
+
+                    <div class="content">
+
+                        <h3>Raiva</h3>
+
+                        <p>
+                            A raiva excessiva e constante pode ser muito nociva para a sua vida, mas sabia que essa emoção também funciona como um mecanismo de proteção? O sentimento de injustiça gera a raiva para que possamos agir em prol do que acreditamos. Portanto, uma raiva moderada e controlada pode ser útil para ajudar a entender o que está errado em sua vida e buscar motivação para possíveis soluções. Além disso, a liberação da raiva ajuda a descarregar uma carga de tensão acumulada. No entanto, é importante ficar ligado na raiva descontrolada. Isso porque essa emoção pode interferir diretamente nas pessoas ao nosso redor. O trânsito caótico, reuniões, filas e outros tipos de frustrações podem gerar uma enorme raiva interna. Porém, o erro é se deixar consumir por essa emoção e descontar em quem está ao seu lado. É claro que momentos estressantes fazem parte do dia a dia e a raiva consequentemente virá. Para não se tornar refém da emoção, busque aprender como administrar a raiva de forma saudável para que a mesma não afete negativamente o seu dia a dia e as suas relações.
+
+                        </p>
+
+                        <br>
+                        <br>
+
+                        <div class="post-img">
+                            <img src="{% static 'admin/assets/img/emotions/raiva.png' %}" class="img-fluid"
+                                style="border-radius: 20px; ">
+                            <!-- coloca a imagem da noticia aqui -->
+                        </div>
+
+                        <br>
+
+                        <p>
+                            A raiva pode se tornar um problema, no entanto, quando ela é excessiva ou expressa de
+                            maneiras que não sejam saudáveis, perigosas ou prejudiciais para si e os outros. A raiva
+                            descontrolada pode se transformar rapidamente em agressão, abuso ou violência e também
+                            dificultar a tomada de decisões racionais, podendo até impactar a saúde física e mental.
+                        </p>
+
+                    </div><!-- End post content -->
+
+                    <div class="content">
+
+                        <h3>Alegria</h3>
+
+
+                        <p>
+                            A emoção mais positiva é a alegria, que está diretamente associada ao prazer e à felicidade. Quando você alcança algum objetivo pessoal ou profissional, por exemplo, é essa emoção que toma conta de si. A alegria é uma das formas que o corpo tem para incentivar a ação, além de atuar como uma recompensa também. Imagine que você está em busca de uma promoção no emprego, trabalhando muito e competindo com outros funcionários por esse aumento. O que te motiva? Saber que se alcançar esse objetivo você será beneficiado por uma intensa alegria, certo? Caso não consiga, provavelmente você será dominado pela tristeza por um certo período, algo que não gostamos tanto assim de sentir. A recompensa com certeza será a alegria e quando a atingimos, queremos vivenciar novamente essa sensação de prazer (ou seja: somos motivados!). É importante se lembrar de que é impossível ser feliz o tempo todo, portanto, é preciso estar pronto para lidar com dificuldades e frustrações. A tristeza compõe as nossas emoções porque é importante para fortalecimento e amadurecimento de quem somos.
+
+                        </p>
+
+                        <br>
+                        <br>
+
+
+                        <div class="post-img">
+                            <img src="{% static 'admin/assets/img/emotions/alegria.png' %}" class="img-fluid"
+                                style="width: 550px; border-radius: 20px;">
+                            <!-- coloca a imagem da noticia aqui -->
+                        </div>
+
+                        <br>
+
+                        <p>
+                            Enquanto alegria é considerada uma das emoções humanas básicas, as coisas que acreditamos
+                            trazer felicidade tendem a ser fortemente influenciadas pela cultura. Por exemplo, as
+                            influências da cultura pop tendem a enfatizar que a obtenção de certas coisas, como comprar
+                            uma casa ou ter um emprego bem remunerado, resultará em felicidade. Na realidade, os fatores
+                            que contribuem para a felicidade são muito mais complexos e altamente individuais.
+                        </p>
+
+                    </div><!-- End post content -->
+
+                    <div class="content">
+
+                        <h3>Tristeza</h3>
+
+
+                        <p>
+                            Um estado de desânimo, cansaço e solidão: é assim que costumamos definir a tristeza. Por mais que muita gente queira fugir da dela, é preciso entender que se trata de uma emoção completamente normal e saudável. Em vários momentos da vida vivenciamos  a tristeza, mas é importante ficar atento, pois se essa emoção se prolongar por muito tempo, significa que o quadro pode estar se agravando para uma depressão. A tristeza comum e saudável deve ser passageira. Entenda também que essa emoção possui vários níveis de intensidade, que vão desde um estado de desapontamento até a angústia, que é mais intensa. Pode ser desencadeada por diversos acontecimentos, como uma desilusão amorosa, problemas financeiros, traumas, descontentamento profissional/pessoal ou algum outro tipo de conflito interior.
+
+                        </p>
+
+                        <br>
+                        <br>
+
+
+                        <div class="post-img">
+                            <img src="{% static 'admin/assets/img/emotions/tristeza2.png' %}" class="img-fluid"
+                                style="width: 570px; border-radius: 20px;">
+                            <!-- coloca a imagem da noticia aqui -->
+                        </div>
+
+                        <br>
+
+                        <p>
+                           
+                        </p>
+
+                        <p>
+                           
+                        </p>
+
+                    </div><!-- End post content -->
+
+
+                    <div class="content">
+
+                        <h3>Nojo</h3>
+
+
+                        <p>
+                            O nojo gera a repulsa ou a necessidade de rejeitar algo, criando uma sensação de desagrado nítida. Um exemplo clássico são as crianças que fazem cara feia e de nojo para as verduras e legumes – trata-se de uma resposta de repulsa diante da chance (real ou imaginária) de ingerir algo nocivo. Como efeito fisiológico mais comum podemos citar as náuseas e o mal-estar gastrointestinal. A principal função do nojo é evitar qualquer tipo de estímulo que possa provocar uma intoxicação. Além da questão da ingestão, o nojo também está associado a um caráter mais social, como por exemplo, por meio da rejeição de estímulos sociais, situações ou pessoas tóxicas.
+
+                        </p>
+
+                        <br>
+                        <br>
+
+
+                        <div class="post-img">
+                            <img src="{% static 'admin/assets/img/emotions/nojo3.png' %}" class="img-fluid"
+                                style="width: 570px; border-radius: 20px;">
+                            <!-- coloca a imagem da noticia aqui -->
+                        </div>
+
+                        <br>
+
+                        <p>
+                            
+                        </p>
+
+                        <p>
+                          
+                        </p>
+
+                    </div><!-- End post content -->
+
+                    <div class="content">
+
+                        <h3>Medo</h3>
+
+
+                        <p>
+                            O medo é um mecanismo de proteção que nos mantém vivos. Sem essa emoção, nos colocaríamos em situações perigosas sem pensar duas vezes sobre os possíveis riscos. O medo, por sua vez, evita que isso aconteça, pois é uma reação involuntária e natural. Sabe quando você vê aquela cobra gigante ou percebe que está prestes a sofrer um assalto a mão armada? Essas são algumas das situações que fazem o cérebro ser ativado involuntariamente, liberando substâncias que disparam o coração, tornam a respiração ofegante etc. Nesses casos, você se depara com o perigo e sabe que se não fizer algo poderá morrer, portanto, o medo entra em cena. Ele te faz correr para bem longe da cobra e tentar fugir do assaltante, por exemplo. Sempre que se sentir amedrontado, o medo te fará reagir de alguma forma.
+
+                        </p>
+
+                        <br>
+                        <br>
+
+
+                        <div class="post-img">
+                            <img src="{% static 'admin/assets/img/emotions/medo.png' %}" class="img-fluid"
+                                style="width: 570px; border-radius: 20px;">
+                            <!-- coloca a imagem da noticia aqui -->
+                        </div>
+
+                        <br>
+
+                        <p>
+                         
+                        </p>
+
+                        <p>
+                            
+                        </p>
+
+                    </div><!-- End post content -->
+
+
+
+                </article><!-- End blog post -->
+            </div>
+        </div>
+</section><!-- End Blog Details Section -->
+
+{% endblock %}

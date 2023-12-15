@@ -1,0 +1,32 @@
+# Arquivos de configuração
+*.pyc
+*.env
+
+# Arquivos de mídia/carregamentos
+media/
+anexo_conteudo
+
+# Arquivos estáticos coletados
+staticfiles/
+
+
+# Banco de dados
+db.sqlite3
+
+# Ambientes virtuais
+venv/
+env/
+
+# Logs e arquivos de saída
+*.log
+
+# Arquivos de backup
+*.bak
+
+# Outros arquivos e pastas gerados localmente
+__pycache__/
+*.swp
+*.swo
+.DS_Store
+
+anexo_conteudo/

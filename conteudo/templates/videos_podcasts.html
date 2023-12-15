@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<style>
+  #div2 {
+    background-image: url("{% static 'admin/assets/img/PagPodcastsVideos.png' %}");
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    position: relative;
+  }
+
+  #div2::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  #div3 {
+    position: relative;
+    z-index: 1;
+    /* bota o conteúdo acima do pseudo-elemento */
+  }
+
+  #div3 h2,
+  #div3 p {
+    color: white;
+    /* cor do texto: branco */
+  }
+
+  .custom-prev a {
+    background-color: #0B949D;
+    color: white;
+  }
+
+
+  .custom-next a {
+    background-color: #0B949D;
+    color: white;
+  }
+
+
+  .custom-page a {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+
+
+  .custom-page a:hover {
+    background-color: #0B949D;
+    color: white;
+  }
+
+  .sr-only {
+    color: white;
+  }
+</style>
+{% endblock %}
+
+{% block main %}
+<div class="breadcrumbs" id="div1">
+  <div class="page-header d-flex align-items-center" id="div2">
+    <div class="row d-flex justify-content-center" id="div3">
+      <div class="col-lg-6 text-center">
+        <h2>Podcasts e Videos</h2>
+        <p>Aproveite!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= Videos e Podcasts ======= -->
+<br>
+<section id="blog" class="blog">
+  <div class="container" data-aos="fade-up">
+
+    <div class="row gy-4 posts-list">
+
+      {% for conteudo in object_list %}
+
+      <div class="col-xl-4 col-md-6">
+        <article>
+          {% if conteudo.categoria.tag == 'Video' %}
+          <p class="post-category">{{ conteudo.categoria.titulo }}</p>
+
+          <h2 class="title">
+            <a
+              href="{{ conteudo.url }}">{{ conteudo.descricao }}</a>
+          </h2>
+
+          <div class="d-flex align-items-center">
+            <iframe width="100%" src="{{ conteudo.embed_link }}" frameborder="0"
+              allowfullscreen></iframe>
+          </div>
+          {% endif %}
+        </article>
+      </div><!-- End item -->
+
+      {% endfor %}
+      <br>
+      <br>
+
+      <div>
+        <nav aria-label="Navegação de página exemplo" style="margin-top: 30px; justify-content: center;">
+          <ul class="pagination">
+            <li class="page-item custom-prev">
+              {% if page_obj.has_previous %}
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Anterior">
+                <span class="sr-only">Anterior</span>
+              </a>
+              {% endif %}
+            </li>
+
+
+            {% for page in page_obj.paginator.page_range %}
+            <li class="page-item custom-page">
+              <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            </li>
+            {% endfor %}
+
+
+            <li class="page-item custom-next">
+              {% if page_obj.has_next %}
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Próximo">
+                <span class="sr-only">Próximo</span>
+              </a>
+              {% endif %}
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+
+    </div>
+</section>
+
+{% endblock %}

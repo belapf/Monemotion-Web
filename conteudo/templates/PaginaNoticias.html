@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<!-- ======= Começo ======= -->
+<div class="breadcrumbs">
+  <div class="page-header d-flex align-items-center" style="background-image: url('');">
+    <div class="container position-relative">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-6 text-center">
+          <h2>Notícias</h2>
+          <p>Bem vindo à página de notícias! veja aqui as principais noticias do campus.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ======= Começo ======= -->
+
+
+<!-- ======= seção de noticias recentes ======= -->
+<br>
+<br>
+<section id="blog" class="blog">
+  <div class="container" data-aos="fade-up">
+
+    <div class="row g-5">
+
+      <div class="col-lg-8">
+
+        <article class="blog-details">
+
+          {% for conteudo in object_list %}
+
+          {% if conteudo.categoria.tag == 'Noticia' %}
+          <!-- Topo da noticia -->
+          <h2 class="title">{{ conteudo.titulo }}</h2> <!-- coloca a titulo da noticia aqui -->
+
+          <div class="meta-top">
+            <ul>
+              <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-details.html">
+                {{ conteudo.autor }}</a>
+              </li><!-- autor da noticia aqui -->
+              <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-details.html"><time
+                    datetime="2020-01-01">{{ conteudo.data_criacao }}</time></a></li> <!-- data da noticia aqui -->
+            </ul>
+          </div>
+          <!-- Final do topo da noticia -->
+
+          <div class="content" >
+
+            <div style="display: flex; justify-content: center;">
+              <div class="post-img" style="width: 100%; display: flex; justify-content: center; padding-top: 30px;">
+                {% if conteudo.anexo %}
+                <img src="{{ conteudo.anexo.url }}" alt="" class="img-fluid"> <!-- coloca a imagem da noticia aqui -->
+                {% endif %}
+              </div>
+            </div>
+            
+
+            <p style="">
+              {{ conteudo.descricao }}
+            </p>
+
+          </div><!-- End post content -->
+
+          <div class="meta-bottom">
+            <i class="bi bi-tags"></i>
+            <ul class="tags">
+              <li><a href="#">{{ conteudo.url }}</a></li>
+            </ul>
+          </div><!-- End meta bottom -->
+
+          {% endif %}
+          {% endfor %}
+
+        </article><!-- End blog post -->
+      </div>
+</section><!-- End Blog Details Section -->
+
+{% endblock %}
